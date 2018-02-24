@@ -4,7 +4,7 @@
     <style>
       body {
           margin: 0 0 0 0;
-          font-family: "Inconsolata";
+          font-family: "Inconsolata", monospace;
           background-color: #0c1014;
       }
       #bottom-bar {
@@ -20,7 +20,6 @@
           text-align: center;
           background-color: #0a3749;
           color: #99d1ce;
-          font-family: "Inconsolata";
           font-size: 1.7vw;
       }
       #bottom-left {
@@ -32,12 +31,11 @@
       }
       #bottom-center {
           display: flex;
-          margin: auto
+          margin: auto;
           text-align: center;
       }
       #bottom-right {
           background-color: #195466;
-          /* padding-left: 2%; */
           padding-right: 2%;
           text-align: right;
           display: flex;
@@ -61,34 +59,31 @@
       #t-top {
           width: 1vw;
           height: 1vw;
-          background: linear-gradient(45deg, #195466 0.66vw, #0a3749 0.66vw);
+          background: linear-gradient(45deg, #195466 0.67vw, #0a3749 0.67vw);
       }
       #t-bottom {
           width: 1vw;
           height: 1vw;
-          background: linear-gradient(135deg, #195466 0.66vw, #0a3749 0.66vw);
+          background: linear-gradient(135deg, #195466 0.67vw, #0a3749 0.67vw);
       }
       #tr-bottom {
           width: 1vw;
           height: 1vw;
-          background: linear-gradient(45deg, #0a3749 0.66vw, #195466 0.66vw);
+          background: linear-gradient(45deg, #0a3749 0.67vw, #195466 0.67vw);
       }
       #tr-top {
           width: 1vw;
           height: 1vw;
-          background: linear-gradient(135deg, #0a3749 0.66vw, #195466 0.66vw);
+          background: linear-gradient(135deg, #0a3749 0.67vw, #195466 0.67vw);
       }
 
       #line-numbers {
           position: fixed;
-          /* min-width: 3%; */
-          /* max-width: 5%; */
           width: 3%;
           padding-right: 1%;
           padding-left: 1%;
           text-align: right;
           height: calc(100% - 4vw);
-          /* color: #99d1ce; */
           color: #245361;
           background-color: #091f2e;
           font-size: 1.7vw;
@@ -111,7 +106,7 @@
         var lineHeight = window.innerWidth * 0.017;
         var height = document.getElementById("line-numbers").scrollHeight;
 
-        // Optimize a bit...
+        // Optimize a bit, only calculate when changed...
         var newAmount = Math.ceil(height / lineHeight);
         if (newAmount != amount) {
           amount = newAmount;
@@ -124,14 +119,14 @@
       // Generate once at page load, and every time window size changes.
       generateLineNumbers();
       window.onresize = generateLineNumbers;
-    </script>
+      </script>
 
     <div id="bottom-bar">
       <div id="bottom-left">
         <div style="padding-right: 0.66vw;">
-          % 1.1k
+          % 4.5k
           <strong>
-           nyymanni.com
+            nyymanni.com
           </strong>
         </div>
         <div> <div id="t-top"></div> <div id="t-bottom"></div> </div>
