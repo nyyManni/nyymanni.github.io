@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+          margin: 0 0 0 0;
+          font-family: "Inconsolata";
+          background-color: #0c1014;
+      }
+      #bottom-bar {
+          position: fixed;
+          vertical-align: center;
+          align-content: space-between;
+          align-items: center;
+          justify-content: space-between;
+          display: flex;
+          bottom: 2vw;
+          width: 100%;
+          height: 2vw;
+          text-align: center;
+          background-color: #0a3749;
+          color: #99d1ce;
+          font-family: "Inconsolata";
+          font-size: 1.7vw;
+      }
+      #bottom-left {
+          display: flex;
+          align-content: space-between;
+          background-color: #195466;
+          text-align: left;
+          padding-left: 2%;
+      }
+      #bottom-center {
+          display: flex;
+          margin: auto
+          text-align: center;
+      }
+      #bottom-right {
+          background-color: #195466;
+          /* padding-left: 2%; */
+          padding-right: 2%;
+          text-align: right;
+          display: flex;
+          align-content: flex-end;
+      }
+      #state {
+          margin-left: 10%;
+          margin-right: 10%;
+      }
+      #major-mode {
+          padding-left: 0.66vw;
+          padding-right: 0.66vw;
+          background-color: #195466;
+      }
+      #minor-modes {
+          padding-left: 0.66vw;
+          padding-right: 0.66vw;
+          background-color: #195466;
+      }
+
+      #t-top {
+          width: 1vw;
+          height: 1vw;
+          background: linear-gradient(45deg, #195466 0.66vw, #0a3749 0.66vw);
+      }
+      #t-bottom {
+          width: 1vw;
+          height: 1vw;
+          background: linear-gradient(135deg, #195466 0.66vw, #0a3749 0.66vw);
+      }
+      #tr-bottom {
+          width: 1vw;
+          height: 1vw;
+          background: linear-gradient(45deg, #0a3749 0.66vw, #195466 0.66vw);
+      }
+      #tr-top {
+          width: 1vw;
+          height: 1vw;
+          background: linear-gradient(135deg, #0a3749 0.66vw, #195466 0.66vw);
+      }
+
+      #line-numbers {
+          position: fixed;
+          /* min-width: 3%; */
+          /* max-width: 5%; */
+          width: 3%;
+          padding-right: 1%;
+          padding-left: 1%;
+          text-align: right;
+          height: calc(100% - 4vw);
+          /* color: #99d1ce; */
+          color: #245361;
+          background-color: #091f2e;
+          font-size: 1.7vw;
+          overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main-content">
+    </div>
+
+    <div id="line-numbers">
+    </div>
+    <script type="text/javascript">
+      var amount = 0;
+      function generateLineNumbers() {
+
+        // We use font-size of 1.7vw, so we can calculate the amount of rows
+        // required.
+        var lineHeight = window.innerWidth * 0.017;
+        var height = document.getElementById("line-numbers").scrollHeight;
+
+        // Optimize a bit...
+        var newAmount = Math.ceil(height / lineHeight);
+        if (newAmount != amount) {
+          amount = newAmount;
+
+          // oh the joy of JavaScript...
+          var nums = Array(Math.ceil(height / lineHeight)).fill().map((e, i)=>i+1);
+          document.getElementById("line-numbers").innerHTML = nums.join("<br>");
+        }
+      }
+      // Generate once at page load, and every time window size changes.
+      generateLineNumbers();
+      window.onresize = generateLineNumbers;
+    </script>
+
+    <div id="bottom-bar">
+      <div id="bottom-left">
+        <div style="padding-right: 0.66vw;">
+          % 1.1k
+          <strong>
+           nyymanni.com
+          </strong>
+        </div>
+        <div> <div id="t-top"></div> <div id="t-bottom"></div> </div>
+      </div>
+      <div id="bottom-center">
+        <div> <div id="tr-bottom"></div> <div id="tr-top"></div> </div>
+        <div id="major-mode">
+          HTML
+        </div>
+        <div> <div id="t-top"></div> <div id="t-bottom"></div> </div>
+        <div id="state">
+          &lt;N&gt;
+        </div>
+        <div> <div id="tr-top"></div> <div id="tr-bottom"></div> </div>
+        <div id="minor-modes">
+          m
+        </div>
+        <div> <div id="t-bottom"></div> <div id="t-top"></div> </div>
+      </div>
+      <div id="bottom-right">
+        <div> <div id="tr-top"></div> <div id="tr-bottom"></div> </div>
+        <div style="padding-left: 0.66vw;">
+          1 : 0 All
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
