@@ -77,49 +77,90 @@
           background: linear-gradient(135deg, #0a3749 0.67vw, #195466 0.67vw);
       }
 
-      #line-numbers {
+      #lines {
           position: fixed;
-          width: 3%;
-          padding-right: 1%;
-          padding-left: 1%;
-          text-align: right;
+          width: 100%;
           height: calc(100% - 4vw);
-          color: #245361;
-          background-color: #091f2e;
           font-size: 1.7vw;
           overflow: hidden;
       }
+      .line {
+          display: flex;
+          align-content: stretch;
+
+          width: 100%;
+      }
+      .linum {
+          padding-right: 1vw;
+          padding-left: 1vw;
+
+          width: 4%;
+          font-size: 1.7vw;
+          text-align: right;
+          color: #245361;
+          background-color: #091f2e;
+      }
+      .highlight {
+          color: #99d1ce;
+          width: 96%;
+      }
+
+      .active > .linum {
+          background-color: #195466;
+          font-weight: bold;
+          color: #99d1ce;
+      }
+      .active > .highlight {
+          background-color: #0a3749;
+
+      }
+
     </style>
   </head>
   <body>
-    <div id="main-content">
+
+    <div id="lines">
     </div>
 
-    <div id="line-numbers">
-    </div>
     <script type="text/javascript">
       var amount = 0;
+
+      function linumMouseIn(elem, num) {
+        document.getElementById("line-indicator").innerHTML = num;
+        elem.classList.add("active");
+      }
+      function linumMouseOut(elem, num) {
+        elem.classList.remove("active");
+      }
+
       function generateLineNumbers() {
 
         // We use font-size of 1.7vw, so we can calculate the amount of rows
         // required.
         var lineHeight = window.innerWidth * 0.017;
-        var height = document.getElementById("line-numbers").scrollHeight;
+        var height = document.getElementById("lines").scrollHeight;
 
         // Optimize a bit, only calculate when changed...
         var newAmount = Math.ceil(height / lineHeight);
-        if (newAmount != amount) {
+        if (newAmount > amount) {
           amount = newAmount;
 
-          // oh the joy of JavaScript...
-          var nums = Array(Math.ceil(height / lineHeight)).fill().map((e, i)=>i+1);
-          document.getElementById("line-numbers").innerHTML = nums.join("<br>");
+          var nums = Array(amount).fill().map((e, i)=> `
+            <div class="line" onmouseover="linumMouseIn(this, ${i + 1})"
+                              onmouseout="linumMouseOut(this, ${i + 1})">
+              <div class="linum">
+                ${i + 1}
+              </div>
+              <div class="highlight">
+              </div>
+            </div>`);
+          document.getElementById("lines").innerHTML = nums.join('');
         }
       }
       // Generate once at page load, and every time window size changes.
       generateLineNumbers();
       window.onresize = generateLineNumbers;
-      </script>
+    </script>
 
     <div id="bottom-bar">
       <div id="bottom-left">
@@ -149,9 +190,11 @@
       <div id="bottom-right">
         <div> <div id="tr-top"></div> <div id="tr-bottom"></div> </div>
         <div style="padding-left: 0.66vw;">
-          1 : 0 All
+          <span id="line-indicator">1</span> : 0 All
         </div>
       </div>
     </div>
+    <script type="text/javascript">
+    </script>
   </body>
 </html>
