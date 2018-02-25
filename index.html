@@ -4,10 +4,13 @@
     <style>
       body {
           background-image: url("bg.jpg");
-          background-size: auto;
+          background-size: 100% 100%;
           margin: 0 0 0 0;
+          width: 100vw;
+          height: 100vh;
       }
       #editor {
+          display: flex;
           margin: 0 0 0 0;
           font-family: "Inconsolata", monospace;
           background-color: #0c1014;
@@ -31,7 +34,7 @@
 
       #minibuffer {
           position: fixed;
-          margin-top: calc(100vh - 2vw);
+          bottom: 0px;
           background-color: #0c1014;
           width: 100%;
           height: 2vw;
