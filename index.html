@@ -23,13 +23,13 @@
           align-items: center;
           justify-content: space-between;
           display: flex;
-          bottom: 2vw;
+          bottom: 1.2em;
           width: 100%;
-          height: 2vw;
+          height: 1.2em;
           text-align: center;
           background-color: #0a3749;
           color: #99d1ce;
-          font-size: 1.7vw;
+          font-size: 1em;
       }
 
       #minibuffer {
@@ -37,7 +37,7 @@
           bottom: 0px;
           background-color: #0c1014;
           width: 100%;
-          height: 2vw;
+          height: 1.2em;
       }
 
       #bottom-left {
@@ -64,42 +64,42 @@
           margin-right: 10%;
       }
       #major-mode {
-          padding-left: 0.66vw;
-          padding-right: 0.66vw;
+          padding-left: 0.5em;
+          padding-right: 0.5em;
           background-color: #195466;
       }
       #minor-modes {
-          padding-left: 0.66vw;
-          padding-right: 0.66vw;
+          padding-left: 0.5em;
+          padding-right: 0.5em;
           background-color: #195466;
       }
 
       #t-top {
-          width: 1vw;
-          height: 1vw;
-          background: linear-gradient(45deg, #195466 0.67vw, #0a3749 0.67vw);
+          width: 0.6em;
+          height: 0.6em;
+          background: linear-gradient(45deg, #195466 0.43em, #0a3749 0.43em);
       }
       #t-bottom {
-          width: 1vw;
-          height: 1vw;
-          background: linear-gradient(135deg, #195466 0.67vw, #0a3749 0.67vw);
+          width: 0.6em;
+          height: 0.6em;
+          background: linear-gradient(135deg, #195466 0.43em, #0a3749 0.43em);
       }
       #tr-bottom {
-          width: 1vw;
-          height: 1vw;
-          background: linear-gradient(45deg, #0a3749 0.67vw, #195466 0.67vw);
+          width: 0.6em;
+          height: 0.6em;
+          background: linear-gradient(45deg, #0a3749 0.43em, #195466 0.43em);
       }
       #tr-top {
-          width: 1vw;
-          height: 1vw;
-          background: linear-gradient(135deg, #0a3749 0.67vw, #195466 0.67vw);
+          width: 0.6em;
+          height: 0.6em;
+          background: linear-gradient(135deg, #0a3749 0.43em, #195466 0.43em);
       }
 
       #lines {
           position: fixed;
           width: 100%;
-          height: calc(100% - 4vw);
-          font-size: 1.7vw;
+          height: calc(100% - 2.4em);
+          font-size: 1em;
           overflow: scroll;
           background-color: #0c1014;
       }
@@ -110,18 +110,17 @@
           width: 100%;
       }
       .linum {
-          padding-right: 1vw;
-          padding-left: 1vw;
-
-          width: 3%;
-          font-size: 1.7vw;
+          padding-right: 0.5em;
+          padding-left: 1em;
+          width: 2em;
+          font-size: 1em;
           text-align: right;
           color: #245361;
           background-color: #091f2e;
       }
       .highlight {
           color: #99d1ce;
-          width: 97%;
+          width: calc(100vw - 2em);
       }
 
       .active > .linum {
@@ -132,10 +131,11 @@
       .active > .highlight {
           background-color: #0a3749;
       }
+      /* remove scrollbar */
       ::-webkit-scrollbar {
-          width: 0px;  /* remove scrollbar space */
+          width: 0px;
           height: 0px;
-          background: transparent;  /* optional: just make scrollbar invisible */
+          background: transparent;
       }
     </style>
   </head>
@@ -158,13 +158,14 @@
 
         function generateLineNumbers() {
 
-          // We use font-size of 1.7vw, so we can calculate the amount of rows
+          // We use font-size of 1em, so we can calculate the amount of rows
           // required.
           var lineHeight = window.innerWidth * 0.017;
           var height = document.getElementById("lines").scrollHeight;
 
           // Optimize a bit, only calculate when changed...
-          var newAmount = Math.ceil(height / lineHeight) + 20;
+          // var newAmount = Math.ceil(height / lineHeight) + 20;
+          var newAmount = 80; // Temporary static value
           if (newAmount > generated) {
 
             var nums = Array(newAmount - generated).fill().map((e, i)=> `
@@ -237,7 +238,7 @@
         </div>
         <div id="bottom-right">
           <div> <div id="tr-top"></div> <div id="tr-bottom"></div> </div>
-          <div style="padding-left: 0.66vw;">
+          <div style="padding-left: 0.5em;">
             <span id="line-indicator">1</span> : 0 All
           </div>
         </div>
