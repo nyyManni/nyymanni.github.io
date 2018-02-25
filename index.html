@@ -139,7 +139,7 @@
       </div>
 
       <script type="text/javascript">
-        var amount = 0;
+        var generated = 0;
 
         function linumMouseIn(elem, num) {
           document.getElementById("line-indicator").innerHTML = num;
@@ -158,25 +158,44 @@
 
           // Optimize a bit, only calculate when changed...
           var newAmount = Math.ceil(height / lineHeight);
-          if (newAmount > amount) {
-            amount = newAmount;
+          if (newAmount > generated) {
 
-            var nums = Array(amount).fill().map((e, i)=> `
-            <div class="line" onmouseover="linumMouseIn(this, ${i + 1})"
-                              onmouseout="linumMouseOut(this, ${i + 1})">
-              <div class="linum">
-                ${i + 1}
-              </div>
-              <div class="highlight">
-              </div>
-            </div>`);
-            document.getElementById("lines").innerHTML = nums.join('');
+            var nums = Array(newAmount - generated).fill().map((e, i)=> `
+              <div class="line"
+                   onmouseover="linumMouseIn(this, ${generated + i + 1})"
+                   onmouseout="linumMouseOut(this, ${generated + i + 1})">
+                <div class="linum">
+                  ${generated + i + 1}
+                </div>
+                <div id="line-${generated + i + 1}" class="highlight">
+                </div>
+              </div>`);
+            document.getElementById("lines").innerHTML += nums.join('');
+            generated = newAmount;
           }
         }
         // Generate once at page load, and every time window size changes.
         generateLineNumbers();
         window.onresize = generateLineNumbers;
-        </script>
+
+        function writeLine(lineNo, line) {
+          lineElem = document.getElementById("line-" + lineNo);
+
+          if (lineElem === null)
+            return;
+
+          lineElem.innerHTML = line.replace(/ /g, "&nbsp;");
+        }
+
+        function writeLines(beginLine, lines) {
+          // Remove newlines from beginning and end of string.
+          lines = lines.replace(/^\n|\n$/g, '').split('\n');
+          for (var i = 0; i < lines.length; ++i) {
+            writeLine(beginLine++, lines[i]);
+          }
+        }
+
+      </script>
 
       <div id="bottom-bar">
         <div id="bottom-left">
@@ -212,8 +231,13 @@
       </div>
       <div id="minibuffer">
       </div>
-      <script type="text/javascript">
-      </script>
     </div>
+    <script type="text/javascript">
+
+      writeLines(2, `
+    def func(p1, p2):
+        return p1 + p2
+`);
+    </script>
   </body>
 </html>
