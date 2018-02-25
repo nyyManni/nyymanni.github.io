@@ -100,7 +100,7 @@
           width: 100%;
           height: calc(100% - 4vw);
           font-size: 1.7vw;
-          overflow: hidden;
+          overflow: scroll;
           background-color: #0c1014;
       }
       .line {
@@ -132,7 +132,11 @@
       .active > .highlight {
           background-color: #0a3749;
       }
-
+      ::-webkit-scrollbar {
+          width: 0px;  /* remove scrollbar space */
+          height: 0px;
+          background: transparent;  /* optional: just make scrollbar invisible */
+      }
     </style>
   </head>
   <body>
@@ -160,7 +164,7 @@
           var height = document.getElementById("lines").scrollHeight;
 
           // Optimize a bit, only calculate when changed...
-          var newAmount = Math.ceil(height / lineHeight);
+          var newAmount = Math.ceil(height / lineHeight) + 20;
           if (newAmount > generated) {
 
             var nums = Array(newAmount - generated).fill().map((e, i)=> `
@@ -187,7 +191,13 @@
           if (lineElem === null)
             return;
 
-          lineElem.innerHTML = line.replace(/ /g, "&nbsp;");
+          lineElem.innerHTML = line
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;")
+            .replace(/ /g, "&nbsp;");
         }
 
         function writeLines(beginLine, lines) {
@@ -239,7 +249,7 @@
 
       writeLines(2, `
     def func(p1, p2):
-        return p1 + p2
+        return p1 < p2
 `);
     </script>
   </body>
