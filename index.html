@@ -3,9 +3,14 @@
   <head>
     <style>
       body {
+          background-image: url("bg.png");
+          margin: 0 0 0 0;
+      }
+      #editor {
           margin: 0 0 0 0;
           font-family: "Inconsolata", monospace;
           background-color: #0c1014;
+          opacity: 0.9;
       }
       #bottom-bar {
           position: fixed;
@@ -22,6 +27,15 @@
           color: #99d1ce;
           font-size: 1.7vw;
       }
+
+      #minibuffer {
+          position: fixed;
+          margin-top: calc(100vh - 2vw);
+          background-color: #0c1014;
+          width: 100%;
+          height: 2vw;
+      }
+
       #bottom-left {
           display: flex;
           align-content: space-between;
@@ -94,7 +108,7 @@
           padding-right: 1vw;
           padding-left: 1vw;
 
-          width: 4%;
+          width: 3%;
           font-size: 1.7vw;
           text-align: right;
           color: #245361;
@@ -102,7 +116,8 @@
       }
       .highlight {
           color: #99d1ce;
-          width: 96%;
+          width: 97%;
+          background-color: #0c1014;
       }
 
       .active > .linum {
@@ -112,40 +127,40 @@
       }
       .active > .highlight {
           background-color: #0a3749;
-
       }
 
     </style>
   </head>
   <body>
 
-    <div id="lines">
-    </div>
+    <div id="editor">
+      <div id="lines">
+      </div>
 
-    <script type="text/javascript">
-      var amount = 0;
+      <script type="text/javascript">
+        var amount = 0;
 
-      function linumMouseIn(elem, num) {
-        document.getElementById("line-indicator").innerHTML = num;
-        elem.classList.add("active");
-      }
-      function linumMouseOut(elem, num) {
-        elem.classList.remove("active");
-      }
+        function linumMouseIn(elem, num) {
+          document.getElementById("line-indicator").innerHTML = num;
+          elem.classList.add("active");
+        }
+        function linumMouseOut(elem, num) {
+          elem.classList.remove("active");
+        }
 
-      function generateLineNumbers() {
+        function generateLineNumbers() {
 
-        // We use font-size of 1.7vw, so we can calculate the amount of rows
-        // required.
-        var lineHeight = window.innerWidth * 0.017;
-        var height = document.getElementById("lines").scrollHeight;
+          // We use font-size of 1.7vw, so we can calculate the amount of rows
+          // required.
+          var lineHeight = window.innerWidth * 0.017;
+          var height = document.getElementById("lines").scrollHeight;
 
-        // Optimize a bit, only calculate when changed...
-        var newAmount = Math.ceil(height / lineHeight);
-        if (newAmount > amount) {
-          amount = newAmount;
+          // Optimize a bit, only calculate when changed...
+          var newAmount = Math.ceil(height / lineHeight);
+          if (newAmount > amount) {
+            amount = newAmount;
 
-          var nums = Array(amount).fill().map((e, i)=> `
+            var nums = Array(amount).fill().map((e, i)=> `
             <div class="line" onmouseover="linumMouseIn(this, ${i + 1})"
                               onmouseout="linumMouseOut(this, ${i + 1})">
               <div class="linum">
@@ -154,47 +169,50 @@
               <div class="highlight">
               </div>
             </div>`);
-          document.getElementById("lines").innerHTML = nums.join('');
+            document.getElementById("lines").innerHTML = nums.join('');
+          }
         }
-      }
-      // Generate once at page load, and every time window size changes.
-      generateLineNumbers();
-      window.onresize = generateLineNumbers;
-    </script>
+        // Generate once at page load, and every time window size changes.
+        generateLineNumbers();
+        window.onresize = generateLineNumbers;
+        </script>
 
-    <div id="bottom-bar">
-      <div id="bottom-left">
-        <div style="padding-right: 0.66vw;">
-          % 4.5k
-          <strong>
-            nyymanni.com
-          </strong>
+      <div id="bottom-bar">
+        <div id="bottom-left">
+          <div style="padding-right: 0.66vw;">
+            % 4.5k
+            <strong>
+              nyymanni.com
+            </strong>
+          </div>
+          <div> <div id="t-top"></div> <div id="t-bottom"></div> </div>
         </div>
-        <div> <div id="t-top"></div> <div id="t-bottom"></div> </div>
+        <div id="bottom-center">
+          <div> <div id="tr-bottom"></div> <div id="tr-top"></div> </div>
+          <div id="major-mode">
+            HTML
+          </div>
+          <div> <div id="t-top"></div> <div id="t-bottom"></div> </div>
+          <div id="state">
+            &lt;N&gt;
+          </div>
+          <div> <div id="tr-top"></div> <div id="tr-bottom"></div> </div>
+          <div id="minor-modes">
+            m
+          </div>
+          <div> <div id="t-bottom"></div> <div id="t-top"></div> </div>
+        </div>
+        <div id="bottom-right">
+          <div> <div id="tr-top"></div> <div id="tr-bottom"></div> </div>
+          <div style="padding-left: 0.66vw;">
+            <span id="line-indicator">1</span> : 0 All
+          </div>
+        </div>
       </div>
-      <div id="bottom-center">
-        <div> <div id="tr-bottom"></div> <div id="tr-top"></div> </div>
-        <div id="major-mode">
-          HTML
-        </div>
-        <div> <div id="t-top"></div> <div id="t-bottom"></div> </div>
-        <div id="state">
-          &lt;N&gt;
-        </div>
-        <div> <div id="tr-top"></div> <div id="tr-bottom"></div> </div>
-        <div id="minor-modes">
-          m
-        </div>
-        <div> <div id="t-bottom"></div> <div id="t-top"></div> </div>
+      <div id="minibuffer">
       </div>
-      <div id="bottom-right">
-        <div> <div id="tr-top"></div> <div id="tr-bottom"></div> </div>
-        <div style="padding-left: 0.66vw;">
-          <span id="line-indicator">1</span> : 0 All
-        </div>
-      </div>
+      <script type="text/javascript">
+      </script>
     </div>
-    <script type="text/javascript">
-    </script>
   </body>
 </html>
