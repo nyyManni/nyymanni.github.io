@@ -4,7 +4,7 @@
     <style>
       body {
           background-image: url("bg.jpg");
-          background-size: 100% 100%;
+          background-size: cover;
           margin: 0 0 0 0;
           width: 100vw;
           height: 100vh;
@@ -38,6 +38,8 @@
           background-color: #0c1014;
           width: 100%;
           height: 1.2em;
+          padding-left: 0.5em;
+          color: #99d1ce;
       }
 
       #bottom-left {
@@ -45,7 +47,7 @@
           align-content: space-between;
           background-color: #195466;
           text-align: left;
-          padding-left: 2%;
+          padding-left: 1em;
       }
       #bottom-center {
           display: flex;
@@ -54,14 +56,14 @@
       }
       #bottom-right {
           background-color: #195466;
-          padding-right: 2%;
+          padding-right: 1em;
           text-align: right;
           display: flex;
           align-content: flex-end;
       }
       #state {
-          margin-left: 10%;
-          margin-right: 10%;
+          margin-left: 0.5em;
+          margin-right: 0.5em;
       }
       #major-mode {
           padding-left: 0.5em;
@@ -95,9 +97,17 @@
           background: linear-gradient(135deg, #0a3749 0.43em, #195466 0.43em);
       }
 
+      #margin {
+          position: fixed;
+          left: 0px;
+          height: calc(100% - 2.4em);
+          background-color: #091f2e;
+          width: 0.5em;
+      }
       #lines {
           position: fixed;
-          width: 100%;
+          left: 0.5em;
+          width: calc(100% - 0.5em);
           height: calc(100% - 2.4em);
           font-size: 1em;
           overflow: scroll;
@@ -106,9 +116,9 @@
       .line {
           display: flex;
           align-content: stretch;
-
           width: 100%;
       }
+
       .linum {
           padding-right: 0.5em;
           padding-left: 1em;
@@ -142,6 +152,8 @@
   <body>
 
     <div id="editor">
+      <div id="margin">
+      </div>
       <div id="lines">
       </div>
 
@@ -149,64 +161,69 @@
         var generated = 0;
 
         function linumMouseIn(elem, num) {
-          document.getElementById("line-indicator").innerHTML = num;
-          elem.classList.add("active");
+            document.getElementById("line-indicator").innerHTML = num;
+            elem.classList.add("active");
         }
         function linumMouseOut(elem, num) {
-          elem.classList.remove("active");
+            elem.classList.remove("active");
         }
 
-        function generateLineNumbers() {
+        function generateLineNumbers(amount) {
 
-          // We use font-size of 1em, so we can calculate the amount of rows
-          // required.
-          var lineHeight = window.innerWidth * 0.017;
-          var height = document.getElementById("lines").scrollHeight;
+            if (amount > generated) {
 
-          // Optimize a bit, only calculate when changed...
-          // var newAmount = Math.ceil(height / lineHeight) + 20;
-          var newAmount = 80; // Temporary static value
-          if (newAmount > generated) {
-
-            var nums = Array(newAmount - generated).fill().map((e, i)=> `
-              <div class="line"
-                   onmouseover="linumMouseIn(this, ${generated + i + 1})"
-                   onmouseout="linumMouseOut(this, ${generated + i + 1})">
-                <div class="linum">
-                  ${generated + i + 1}
-                </div>
-                <div id="line-${generated + i + 1}" class="highlight">
-                </div>
-              </div>`);
-            document.getElementById("lines").innerHTML += nums.join('');
-            generated = newAmount;
-          }
+                var nums = Array(amount - generated).fill().map((e, i)=> `
+                    <div class="line"
+                        onmouseover="linumMouseIn(this, ${generated + i + 1})"
+                        onmouseout="linumMouseOut(this, ${generated + i + 1})">
+                        <div class="linum">
+                        ${generated + i + 1}
+                        </div>
+                        <div id="line-${generated + i + 1}" class="highlight">
+                        </div>
+                    </div>`);
+                document.getElementById("lines").innerHTML += nums.join('');
+                generated = amount;
+            }
         }
-        // Generate once at page load, and every time window size changes.
-        generateLineNumbers();
-        window.onresize = generateLineNumbers;
+
+        function quote(string) {
+            return string
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;")
+                .replace(/ /g, "&nbsp;");
+        }
 
         function writeLine(lineNo, line) {
-          lineElem = document.getElementById("line-" + lineNo);
+            lineElem = document.getElementById("line-" + lineNo);
 
-          if (lineElem === null)
-            return;
+            if (lineElem === null)
+                return;
 
-          lineElem.innerHTML = line
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;")
-            .replace(/ /g, "&nbsp;");
+            // Escape the line, code often contains nasty stuff
+            lineElem.innerHTML = quote(line);
         }
 
         function writeLines(beginLine, lines) {
-          // Remove newlines from beginning and end of string.
-          lines = lines.replace(/^\n|\n$/g, '').split('\n');
-          for (var i = 0; i < lines.length; ++i) {
-            writeLine(beginLine++, lines[i]);
-          }
+            // Remove newlines from beginning and end of string.
+            lines = lines.replace(/^\n|\n$/g, '').split('\n');
+
+            // Generate line numbers if needed
+            generateLineNumbers(beginLine + lines.length);
+
+            for (var i = 0; i < lines.length; ++i) {
+                writeLine(beginLine++, lines[i]);
+            }
+        }
+
+        function echoMinibuffer(message) {
+            document.getElementById("minibuffer-message").innerHTML = quote(message);
+            setTimeout(function () {
+                document.getElementById("minibuffer-message").innerHTML = '';
+            }, 3000);
         }
 
       </script>
@@ -224,7 +241,7 @@
         <div id="bottom-center">
           <div> <div id="tr-bottom"></div> <div id="tr-top"></div> </div>
           <div id="major-mode">
-            HTML
+            Python
           </div>
           <div> <div id="t-top"></div> <div id="t-bottom"></div> </div>
           <div id="state">
@@ -244,14 +261,15 @@
         </div>
       </div>
       <div id="minibuffer">
+        <span id="minibuffer-message"></span>
       </div>
     </div>
     <script type="text/javascript">
-
       writeLines(2, `
     def func(p1, p2):
         return p1 < p2
 `);
+      echoMinibuffer("Page loaded");
     </script>
   </body>
 </html>
