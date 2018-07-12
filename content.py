@@ -7,12 +7,17 @@ I like small websites.
 """
 import threading
 import time
+from datetime import datetime
+import random
 
 
 class Self:
 
-    name = 'Henrik Nyman'
-    email = 'henrikjohannesnyman@gmail.com'
+    def __init__(self):
+        year = 1992
+        self.name = 'Henrik Nyman'
+        self.hometown = 'Hinnerjoki, Eura'
+        self.email = 'henrikjohannesnyman@gmail.com'
 
     def education(self):
         year = 2011
@@ -21,6 +26,7 @@ class Self:
         # Military service
         year = 2012
         time.sleep(180 * 24 * 3600)
+        self.hometown = 'Tampere'
 
         year = 2015
         threading.Thread(target=self.work_experience).start()
@@ -34,6 +40,19 @@ class Self:
                               location='Tampere University of Technology')
 
     def work_experience(self):
-
         company = 'OptoFidelity Ltd.'
+        title = 'Software Trainee'
+
+        year = 2015
+        self.countries_visited.append('China')
+
         title = 'Software Engineer'
+
+        year = 2016
+        self.countries_visited.append('U.S.')
+
+        year = datetime.now().year
+        while True:
+            self.work(company)
+            self.masters_thesis(company)
+            time.sleep(random.randint(5 * 3600, 8 * 3600))

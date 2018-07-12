@@ -319,12 +319,17 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span>{{{space}}}<span class="nn">threading</span>
 <span class="kn">import</span>{{{space}}}<span class="nn">time</span>
+<span class="kn">from</span>{{{space}}}<span class="nn">datetime</span>{{{space}}}<span class="kn">import</span>{{{space}}}<span class="n">datetime</span>
+<span class="kn">import</span>{{{space}}}<span class="nn">random</span>
 
 
 <span class="k">class</span>{{{space}}}<span class="nc">Self</span><span class="p">:</span>
 
-{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="n">name</span>{{{space}}}<span class="o">=</span>{{{space}}}<span class="s1">&#39;Henrik{{{space}}}Nyman&#39;</span>
-{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="n">email</span>{{{space}}}<span class="o">=</span>{{{space}}}<span class="s1">&#39;henrikjohannesnyman@gmail.com&#39;</span>
+{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="k">def</span>{{{space}}}<span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="n">year</span>{{{space}}}<span class="o">=</span>{{{space}}}<span class="mi">1992</span>
+{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="bp">self</span><span class="o">.</span><span class="n">name</span>{{{space}}}<span class="o">=</span>{{{space}}}<span class="s1">&#39;Henrik{{{space}}}Nyman&#39;</span>
+{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="bp">self</span><span class="o">.</span><span class="n">hometown</span>{{{space}}}<span class="o">=</span>{{{space}}}<span class="s1">&#39;Hinnerjoki,{{{space}}}Eura&#39;</span>
+{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="bp">self</span><span class="o">.</span><span class="n">email</span>{{{space}}}<span class="o">=</span>{{{space}}}<span class="s1">&#39;henrikjohannesnyman@gmail.com&#39;</span>
 
 {{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="k">def</span>{{{space}}}<span class="nf">education</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 {{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="n">year</span>{{{space}}}<span class="o">=</span>{{{space}}}<span class="mi">2011</span>
@@ -333,6 +338,7 @@
 {{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="c1">#{{{space}}}Military{{{space}}}service</span>
 {{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="n">year</span>{{{space}}}<span class="o">=</span>{{{space}}}<span class="mi">2012</span>
 {{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">180</span>{{{space}}}<span class="o">*</span>{{{space}}}<span class="mi">24</span>{{{space}}}<span class="o">*</span>{{{space}}}<span class="mi">3600</span><span class="p">)</span>
+{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="bp">self</span><span class="o">.</span><span class="n">hometown</span>{{{space}}}<span class="o">=</span>{{{space}}}<span class="s1">&#39;Tampere&#39;</span>
 
 {{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="n">year</span>{{{space}}}<span class="o">=</span>{{{space}}}<span class="mi">2015</span>
 {{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">work_experience</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
@@ -346,9 +352,22 @@
 {{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="n">location</span><span class="o">=</span><span class="s1">&#39;Tampere{{{space}}}University{{{space}}}of{{{space}}}Technology&#39;</span><span class="p">)</span>
 
 {{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="k">def</span>{{{space}}}<span class="nf">work_experience</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-
 {{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="n">company</span>{{{space}}}<span class="o">=</span>{{{space}}}<span class="s1">&#39;OptoFidelity{{{space}}}Ltd.&#39;</span>
+{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="n">title</span>{{{space}}}<span class="o">=</span>{{{space}}}<span class="s1">&#39;Software{{{space}}}Trainee&#39;</span>
+
+{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="n">year</span>{{{space}}}<span class="o">=</span>{{{space}}}<span class="mi">2015</span>
+{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="bp">self</span><span class="o">.</span><span class="n">countries_visited</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;China&#39;</span><span class="p">)</span>
+
 {{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="n">title</span>{{{space}}}<span class="o">=</span>{{{space}}}<span class="s1">&#39;Software{{{space}}}Engineer&#39;</span>
+
+{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="n">year</span>{{{space}}}<span class="o">=</span>{{{space}}}<span class="mi">2016</span>
+{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="bp">self</span><span class="o">.</span><span class="n">countries_visited</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;U.S.&#39;</span><span class="p">)</span>
+
+{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="n">year</span>{{{space}}}<span class="o">=</span>{{{space}}}<span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">year</span>
+{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="k">while</span>{{{space}}}<span class="bp">True</span><span class="p">:</span>
+{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="bp">self</span><span class="o">.</span><span class="n">work</span><span class="p">(</span><span class="n">company</span><span class="p">)</span>
+{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="bp">self</span><span class="o">.</span><span class="n">masters_thesis</span><span class="p">(</span><span class="n">company</span><span class="p">)</span>
+{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span>{{{space}}}<span class="o">*</span>{{{space}}}<span class="mi">3600</span><span class="p">,</span>{{{space}}}<span class="mi">8</span>{{{space}}}<span class="o">*</span>{{{space}}}<span class="mi">3600</span><span class="p">))</span>
 <!-- Content end -->
 `);
       echoMinibuffer("Page loaded");
