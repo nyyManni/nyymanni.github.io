@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <style>
+    <title>nyymanni.com</title>
+    <style type="text/css">
       body {
           background-image: url("bg.jpg");
           background-size: cover;
@@ -117,6 +118,7 @@
           display: flex;
           align-content: stretch;
           width: 100%;
+          position: relative;
       }
 
       .linum {
@@ -147,21 +149,34 @@
           height: 0px;
           background: transparent;
       }
+      .vl {
+          border-left: 2px solid #091f2e;
+          height: 100%;
+          position: absolute;
+          left: 44em;
+          margin-left: -1px;
+          top: 0;
+      }
 
-      .string {
+      .active > .vl {
+          /* Make only one pixel wide, color is rather harsh. */
+          border-left: 1px solid #99d1ce;
+      }
+
+      span.sd, span.s1, span.s2 {
           color: #2aa889;
       }
-      .func {
+      span.fm, span.n, span.nf {
           color: #599cab;
       }
-      .keyword {
+      span.k, span.bp {
           font-weight: bold;
           color: #195466;
       }
-      .comment {
+      span.c1, span.ch {
           color: #245361;
       }
-      .builtin {
+      span.nd, span.nc {
           color: #d26937;
       }
     </style>
@@ -196,6 +211,7 @@
                         <div class="linum">
                         ${generated + i + 1}
                         </div>
+                        <div class="vl"></div>
                         <div id="line-${generated + i + 1}" class="highlight">
                         </div>
                     </div>`);
@@ -214,21 +230,22 @@
                 .replace(/ /g, "&nbsp;");
         }
 
+        function unquote(string) {
+
+            // Fix indentation:
+            return string
+                .replace(/{{{space}}}/g, "&nbsp;")
+                .replace(/{{{backtick}}}/g, "`")
+        }
+
         function writeLine(lineNo, line) {
             lineElem = document.getElementById("line-" + lineNo);
 
             if (lineElem === null)
                 return;
 
-            line = quote(line);
-
-            line = line
-                .replace(/\{%:(\w+):/g, '<span class="$1">')
-                .replace(/%\}/g, '</span>')
-
-
             // Escape the line, code often contains nasty stuff
-            lineElem.innerHTML = line;
+            lineElem.innerHTML = unquote(line);
         }
 
         function writeLines(beginLine, lines) {
@@ -289,12 +306,36 @@
       </div>
     </div>
     <script type="text/javascript">
-      writeLines(2, `
-    {%:keyword:def%} {%:func:func%}(p1, p2):
-        {%:keyword:return%} p1 < p2
 
-    {%:comment:# Call with string%}
-    {%:func:func%}({%:string:"test"%}, 3)
+      // Gets generated with pygmentize
+      writeLines(0, `
+<!-- Content begin -->
+<span class="ch">#!/usr/bin/env{{{space}}}python</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Welcome{{{space}}}to{{{space}}}www.nyymanni.com</span>
+
+<span class="sd">Size{{{space}}}of{{{space}}}this{{{space}}}webpage{{{space}}}is{{{space}}}68{{{space}}}kB,{{{space}}}of{{{space}}}which{{{space}}}56{{{space}}}kB{{{space}}}is{{{space}}}due{{{space}}}to{{{space}}}{{{space}}}the{{{space}}}background{{{space}}}image.</span>
+<span class="sd">I{{{space}}}like{{{space}}}small{{{space}}}websites.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="k">class</span>{{{space}}}<span class="nc">Self</span><span class="p">:</span>
+
+{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="n">name</span>{{{space}}}<span class="o">=</span>{{{space}}}<span class="s1">&#39;Henrik{{{space}}}Nyman&#39;</span>
+{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="n">email</span>{{{space}}}<span class="o">=</span>{{{space}}}<span class="s1">&#39;henrikjohannesnyman@gmail.com&#39;</span>
+
+{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="k">def</span>{{{space}}}<span class="nf">education</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="n">year</span>{{{space}}}<span class="o">=</span>{{{space}}}<span class="mi">2011</span>
+{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="k">yield</span>{{{space}}}<span class="n">Matriculation</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="s1">&#39;Euran{{{space}}}Lukio&#39;</span><span class="p">)</span>
+
+{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="n">year</span>{{{space}}}<span class="o">=</span>{{{space}}}<span class="mi">2016</span>
+{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="k">yield</span>{{{space}}}<span class="n">Candidate</span><span class="p">(</span><span class="n">major</span><span class="o">=</span><span class="s1">&#39;Information{{{space}}}Technology&#39;</span><span class="p">,</span>
+{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="n">location</span><span class="o">=</span><span class="s1">&#39;Tampere{{{space}}}University{{{space}}}of{{{space}}}Technology&#39;</span><span class="p">)</span>
+
+{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="n">year</span>{{{space}}}<span class="o">=</span>{{{space}}}<span class="mi">2018</span>
+{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="k">yield</span>{{{space}}}<span class="n">MasterOfScience</span><span class="p">(</span><span class="n">major</span><span class="o">=</span><span class="s1">&#39;Pervasive{{{space}}}Systems&#39;</span><span class="p">,</span>
+{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="n">location</span><span class="o">=</span><span class="s1">&#39;Tampere{{{space}}}University{{{space}}}of{{{space}}}Technology&#39;</span><span class="p">)</span>
+<!-- Content end -->
 `);
       echoMinibuffer("Page loaded");
     </script>
