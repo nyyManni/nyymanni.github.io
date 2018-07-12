@@ -169,7 +169,7 @@
       span.fm, span.n, span.nf {
           color: #599cab;
       }
-      span.k, span.bp {
+      span.k, span.kn, span.bp {
           font-weight: bold;
           color: #195466;
       }
@@ -317,6 +317,8 @@
 <span class="sd">Size{{{space}}}of{{{space}}}this{{{space}}}webpage{{{space}}}is{{{space}}}68{{{space}}}kB,{{{space}}}of{{{space}}}which{{{space}}}56{{{space}}}kB{{{space}}}is{{{space}}}due{{{space}}}to{{{space}}}{{{space}}}the{{{space}}}background{{{space}}}image.</span>
 <span class="sd">I{{{space}}}like{{{space}}}small{{{space}}}websites.</span>
 <span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span>{{{space}}}<span class="nn">threading</span>
+<span class="kn">import</span>{{{space}}}<span class="nn">time</span>
 
 
 <span class="k">class</span>{{{space}}}<span class="nc">Self</span><span class="p">:</span>
@@ -328,6 +330,13 @@
 {{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="n">year</span>{{{space}}}<span class="o">=</span>{{{space}}}<span class="mi">2011</span>
 {{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="k">yield</span>{{{space}}}<span class="n">Matriculation</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="s1">&#39;Euran{{{space}}}Lukio&#39;</span><span class="p">)</span>
 
+{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="c1">#{{{space}}}Military{{{space}}}service</span>
+{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="n">year</span>{{{space}}}<span class="o">=</span>{{{space}}}<span class="mi">2012</span>
+{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">180</span>{{{space}}}<span class="o">*</span>{{{space}}}<span class="mi">24</span>{{{space}}}<span class="o">*</span>{{{space}}}<span class="mi">3600</span><span class="p">)</span>
+
+{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="n">year</span>{{{space}}}<span class="o">=</span>{{{space}}}<span class="mi">2015</span>
+{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">work_experience</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
 {{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="n">year</span>{{{space}}}<span class="o">=</span>{{{space}}}<span class="mi">2016</span>
 {{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="k">yield</span>{{{space}}}<span class="n">Candidate</span><span class="p">(</span><span class="n">major</span><span class="o">=</span><span class="s1">&#39;Information{{{space}}}Technology&#39;</span><span class="p">,</span>
 {{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="n">location</span><span class="o">=</span><span class="s1">&#39;Tampere{{{space}}}University{{{space}}}of{{{space}}}Technology&#39;</span><span class="p">)</span>
@@ -335,6 +344,11 @@
 {{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="n">year</span>{{{space}}}<span class="o">=</span>{{{space}}}<span class="mi">2018</span>
 {{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="k">yield</span>{{{space}}}<span class="n">MasterOfScience</span><span class="p">(</span><span class="n">major</span><span class="o">=</span><span class="s1">&#39;Pervasive{{{space}}}Systems&#39;</span><span class="p">,</span>
 {{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="n">location</span><span class="o">=</span><span class="s1">&#39;Tampere{{{space}}}University{{{space}}}of{{{space}}}Technology&#39;</span><span class="p">)</span>
+
+{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="k">def</span>{{{space}}}<span class="nf">work_experience</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="n">company</span>{{{space}}}<span class="o">=</span>{{{space}}}<span class="s1">&#39;OptoFidelity{{{space}}}Ltd.&#39;</span>
+{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}{{{space}}}<span class="n">title</span>{{{space}}}<span class="o">=</span>{{{space}}}<span class="s1">&#39;Software{{{space}}}Engineer&#39;</span>
 <!-- Content end -->
 `);
       echoMinibuffer("Page loaded");
