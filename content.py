@@ -2,7 +2,7 @@
 """
 Welcome to www.nyymanni.com
 
-Size of this webpage is 68 kB, of which 56 kB is due to  the background image.
+Size of this webpage is 28 kB, including the background image.
 I like small websites.
 """
 import threading
