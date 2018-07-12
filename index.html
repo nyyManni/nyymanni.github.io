@@ -122,6 +122,12 @@
       }
 
       .linum {
+          -moz-user-select: none;
+          -webkit-user-select: none;
+          -ms-user-select:none;
+          user-select:none;
+          -o-user-select:none;
+
           padding-right: 0.5em;
           padding-left: 1em;
           width: 2em;
@@ -208,7 +214,10 @@
                     <div class="line"
                         onmouseover="linumMouseIn(this, ${generated + i + 1})"
                         onmouseout="linumMouseOut(this, ${generated + i + 1})">
-                        <div class="linum">
+                        <div class="linum"
+                             unselectable="on"
+                             onselectstart="return false;"
+                             onmousedown="return false;">
                         ${generated + i + 1}
                         </div>
                         <div class="vl"></div>
