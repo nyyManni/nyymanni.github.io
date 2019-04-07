@@ -1,4 +1,5 @@
 
+import sys
 from pygments.formatters import HtmlFormatter
 
 
@@ -9,8 +10,8 @@ class CustomFormatter(HtmlFormatter):
             yield type, text.replace(' ', '{{{space}}}').replace('`', "{{{backtick}}}")
 
     def format(self, tokensource, outfile):
-        source = self._format_lines(self.quote(tokensource))
 
+        source = self._format_lines(self.quote(tokensource))
         for t, piece in source:
 
-            outfile.write(piece)
+            outfile.write(piece.encode('utf-8'))
