@@ -5,7 +5,7 @@ Welcome to www.nyymanni.com
 This web page tells the story of my life.
 
 As it might be obvious from the style of this website, my tool of choice is GNU
-Emacs. I also get along with Vim-folks, since I prever vim-style keybindings and
+Emacs. I also get along with Vim-folks, since I prefer vim-style keybindings and
 use evil-mode. I am highly allergic to IDEs and tools that hide complexity and
 remove control. I am a Linux-user and prefer working with a tiling window manager
 (currently using Sway).
